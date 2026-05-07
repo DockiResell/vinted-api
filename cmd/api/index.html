@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Test</h1>
+
+<input id="search">
+<button onclick="search()">Go</button>
+
+<div id="results"></div>
+
+<script>
+async function search() {
+    const q = document.getElementById("search").value
+
+    const res = await fetch(`/search?q=${q}`)
+    const data = await res.json()
+
+    document.getElementById("results").innerHTML =
+        JSON.stringify(data, null, 2)
+}
+</script>
+
+</body>
+</html>
