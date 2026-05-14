@@ -104,11 +104,20 @@ func (s *VintedScraper) Search(ctx context.Context, job models.ScrapeJob) ([]mod
 	}
 	var items []models.Item
 	for _, item := range response.Items {
-		price, err := strconv.ParseFloat(item.Price.Amount, 64)
-		if err != nil {
+
+	if job.Size != "" && item.SizeTitle != job.Size {
+	    continue
+
+	}
+
+	price, err := strconv.ParseFloat(item.Price.Amount, 64)
+	if err != nil {
 			logger.Error("Error parsing price", zap.Error(err))
 			continue
 		}
+
+                fmt.Println(item)
+
 		items = append(items, models.Item{
 			ID:       strconv.FormatInt(item.ID, 10),
 			Title:    item.Title,
@@ -117,6 +126,7 @@ func (s *VintedScraper) Search(ctx context.Context, job models.ScrapeJob) ([]mod
 			URL:      item.URL,
 			ImageURL: item.Photo.URL,
 			Platform: "vinted",
+                        Condition: item.Status,
 		})
 	}
 	return items, nil

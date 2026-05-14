@@ -15,11 +15,13 @@ func main() {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		query := r.URL.Query().Get("q")
+                size := r.URL.Query().Get("size")
 
 		scraper := vinted.NewVintedScraper()
 
 		items, err := scraper.Search(r.Context(), models.ScrapeJob{
 			Query: query,
+                        Size: size,
 		})
 
 		if err != nil {
