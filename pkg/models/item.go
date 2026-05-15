@@ -9,4 +9,5 @@ type Item struct {
 	ImageURL string  `json:"image_url"`
 	Platform string  `json:"platform"`
         Condition string `json:"condition"`
+        Size     string  `json:"size"`
 }

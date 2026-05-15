@@ -127,6 +127,7 @@ func (s *VintedScraper) Search(ctx context.Context, job models.ScrapeJob) ([]mod
 			ImageURL: item.Photo.URL,
 			Platform: "vinted",
                         Condition: item.Status,
+                        Size: item.SizeTitle,
 		})
 	}
 	return items, nil
