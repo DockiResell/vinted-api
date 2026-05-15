@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/url"
 	"strconv"
+        "strings"
 
 	"github.com/2spy/vinted-discord-bot/pkg/logger"
 	"github.com/2spy/vinted-discord-bot/pkg/models"
@@ -109,6 +110,11 @@ func (s *VintedScraper) Search(ctx context.Context, job models.ScrapeJob) ([]mod
 	    continue
 
 	}
+
+        if job.Category != "" && !strings.Contains(strings.ToLower(item.Title), strings.ToLower(job.Category)) {
+	    continue
+        
+        }
 
 	price, err := strconv.ParseFloat(item.Price.Amount, 64)
 	if err != nil {
