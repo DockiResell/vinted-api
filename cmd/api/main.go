@@ -17,6 +17,7 @@ func main() {
 		query := r.URL.Query().Get("q")
                 size := r.URL.Query().Get("size")
                 category := r.URL.Query().Get("category")
+                catalogID := r.URL.Query().Get("catalog_id")
 
 		scraper := vinted.NewVintedScraper()
 
@@ -24,6 +25,7 @@ func main() {
 			Query: query,
                         Size: size,
                         Category: category,
+                        CatalogID: catalogID,
 		})
 
 		if err != nil {
